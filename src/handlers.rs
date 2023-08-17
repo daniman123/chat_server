@@ -95,9 +95,8 @@ pub async fn handle_connection(
 
     let mut active_room: Option<String> = None; // Define a variable to hold the active_room value
 
+    // println!("{:?}", msg);
     let broadcast_incoming = incoming.try_for_each(|msg| {
-        println!("{:?}", msg);
-
         if let Ok(json) = msg.to_text().map_err(|_| ()) {
             if let Ok(data) = serde_json::from_str::<Value>(&json) {
                 if data.get("join_room").is_none() {
